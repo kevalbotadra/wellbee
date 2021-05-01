@@ -105,7 +105,7 @@ export const ConnSelector = ({ selectedItem, setSelectedItem }) => (
           borderBottomLeftRadius: "1.2rem",
           borderBottomRightRadius: "1.2rem",
           borderTop: "1px solid #EBBC56",
-          color: "#276597",
+          color: "#b18e42",
           backgroundColor: "#EBBC5633",
         }}
       >

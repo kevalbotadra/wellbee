@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from "@material-ui/core";
 export const ChatItem = ({ author, message, timestamp, handleClick }) => (
   <Button
+    color="primary"
     style={{
       display: "flex",
       justifyContent: "space-between",
@@ -12,6 +13,7 @@ export const ChatItem = ({ author, message, timestamp, handleClick }) => (
       cursor: "pointer",
       transition: "box-shadow 200ms",
       textTransform: "none",
+      color: "black",
     }}
     onClick={handleClick}
   >
