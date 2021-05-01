@@ -63,7 +63,10 @@ export const ChatSelector = ({
         gridColumn="3/-1"
         gridGap="1rem"
       >
-        <Typography variant="h1" style={{ fontSize: 28, fontWeight: "bolder" }}>
+        <Typography
+          variant="h1"
+          style={{ fontSize: 28, fontWeight: "bolder", letterSpacing: 0.7 }}
+        >
           {title}
         </Typography>
         {chatItems.map((item, key) => (
