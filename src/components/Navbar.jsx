@@ -43,18 +43,18 @@ const Navbar = () => {
           height="30"
           alt="the wellbee logo"
         />
-        <Box display="flex">
+        <Box display="flex" style={{}}>
           <Button
             onClick={() => history.push("/")}
             color="white"
-            style={{ marginLeft: "1rem", color: "white" }}
+            style={{ marginLeft: "1rem", color: "white", letterSpacing: "1px" }}
           >
             Home
           </Button>
           <Button
             onClick={() => history.push("/help")}
             color="white"
-            style={{ marginLeft: "1rem", color: "white" }}
+            style={{ marginLeft: "1rem", color: "white", letterSpacing: "1px" }}
           >
             Get Help
           </Button>
@@ -62,7 +62,11 @@ const Navbar = () => {
             <Button
               onClick={() => history.push("/profile")}
               color="white"
-              style={{ marginLeft: "1rem", color: "white" }}
+              style={{
+                marginLeft: "1rem",
+                color: "white",
+                letterSpacing: "1px",
+              }}
             >
               Profile
             </Button>
@@ -76,6 +80,7 @@ const Navbar = () => {
               marginRight: "1.2rem",
               paddingLeft: "2rem",
               paddingRight: "2rem",
+              letterSpacing: "1px",
             }}
           >
             {currentUser ? "Chats" : "Connect"}
