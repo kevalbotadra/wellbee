@@ -32,7 +32,7 @@ const Connect = props => {
             change.type === "added" &&
             index === snapshot.docChanges().length - 1
           )
-            console.log(`udpate ${toast("New messge!")}`);
+            console.log(`update ${toast("New messge!")}`);
         });
 
         if (snapshot.empty) {
@@ -54,7 +54,8 @@ const Connect = props => {
   useEffect(() => {
     const chatid = props.match.params.chatid;
     setActiveChat(chats.find(chat => chat.id === chatid));
-  }, [props, chats]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props]);
 
   const changeSelectedItem = newItem => {
     history.push("/connect");
