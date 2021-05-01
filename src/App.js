@@ -3,6 +3,7 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import Connect from "./pages/Connect";
 import Home from "./pages/Home";
 import { Login } from "./pages/Login";
+import Profile from "./pages/Profile";
 import { Register } from "./pages/Register";
 
 const App = () => (
@@ -13,6 +14,7 @@ const App = () => (
       <Route path="/register" component={Register} />
       <PrivateRoute path="/connect/:chatid" component={Connect} />
       <PrivateRoute path="/connect" component={Connect} />
+      <PrivateRoute path="/profile" component={Profile} />
     </Switch>
   </Router>
 );

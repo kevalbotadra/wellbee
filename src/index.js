@@ -10,7 +10,7 @@ import "./styles.css";
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#3DA3F5",
+      main: "#EBBC56",
       contrastText: "white",
     },
   },

@@ -35,8 +35,8 @@ export const ConnSelector = ({ selectedItem, setSelectedItem }) => (
             paddingLeft: "2rem",
             borderRadius: "none !important",
             marginBottom: "1rem",
-            color: selectedItem === "chat" && "#3DA3F5",
-            borderRight: selectedItem === "chat" && "2px solid #3DA3F5",
+            color: selectedItem === "chat" && "#EBBC56",
+            borderRight: selectedItem === "chat" && "2px solid #EBBC56",
             transition: "color 200ms",
           }}
           onClick={() => setSelectedItem("chat")}
@@ -44,7 +44,7 @@ export const ConnSelector = ({ selectedItem, setSelectedItem }) => (
           <ListItemIcon>
             <Inbox
               style={{
-                color: selectedItem === "chat" && "#3DA3F5",
+                color: selectedItem === "chat" && "#EBBC56",
               }}
             />
           </ListItemIcon>
@@ -57,8 +57,8 @@ export const ConnSelector = ({ selectedItem, setSelectedItem }) => (
             paddingLeft: "2rem",
             borderRadius: "none !important",
             marginBottom: "1rem",
-            color: selectedItem === "favourites" && "#3DA3F5",
-            borderRight: selectedItem === "favourites" && "2px solid #3DA3F5",
+            color: selectedItem === "favourites" && "#EBBC56",
+            borderRight: selectedItem === "favourites" && "2px solid #EBBC56",
             transition: "color 200ms",
           }}
           onClick={() => setSelectedItem("favourites")}
@@ -66,7 +66,7 @@ export const ConnSelector = ({ selectedItem, setSelectedItem }) => (
           <ListItemIcon>
             <Star
               style={{
-                color: selectedItem === "favourites" && "#3DA3F5",
+                color: selectedItem === "favourites" && "#EBBC56",
               }}
             />
           </ListItemIcon>
@@ -79,8 +79,8 @@ export const ConnSelector = ({ selectedItem, setSelectedItem }) => (
             paddingLeft: "2rem",
             borderRadius: "none !important",
             marginBottom: "1rem",
-            color: selectedItem === "friends" && "#3DA3F5",
-            borderRight: selectedItem === "friends" && "2px solid #3DA3F5",
+            color: selectedItem === "friends" && "#EBBC56",
+            borderRight: selectedItem === "friends" && "2px solid #EBBC56",
             transition: "color 200ms",
           }}
           onClick={() => setSelectedItem("friends")}
@@ -88,7 +88,7 @@ export const ConnSelector = ({ selectedItem, setSelectedItem }) => (
           <ListItemIcon>
             <Person
               style={{
-                color: selectedItem === "friends" && "#3DA3F5",
+                color: selectedItem === "friends" && "#EBBC56",
               }}
             />
           </ListItemIcon>
@@ -104,9 +104,9 @@ export const ConnSelector = ({ selectedItem, setSelectedItem }) => (
           borderRadius: "none !important",
           borderBottomLeftRadius: "1.2rem",
           borderBottomRightRadius: "1.2rem",
-          borderTop: "1px solid #3DA3F5",
+          borderTop: "1px solid #EBBC56",
           color: "#276597",
-          backgroundColor: "#3DA3F533",
+          backgroundColor: "#EBBC5633",
         }}
       >
         <ListItemIcon>

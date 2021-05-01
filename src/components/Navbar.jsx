@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@material-ui/core";
+import { Box, Button } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -24,7 +24,7 @@ const Navbar = () => {
       alignItems="center"
       style={{ userSelect: "none" }}
     >
-      <Typography
+      {/* <Typography
         style={{
           fontWeight: "bold",
           fontSize: 28,
@@ -33,7 +33,13 @@ const Navbar = () => {
         }}
       >
         wellbee
-      </Typography>
+      </Typography> */}
+      <img
+        style={{ marginLeft: "1.2rem" }}
+        src="/wellbee.svg"
+        height="30"
+        alt="the wellbee logo"
+      />
       <Box display="flex">
         <Button
           onClick={() => history.push("/")}
