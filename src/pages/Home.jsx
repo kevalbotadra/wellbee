@@ -13,13 +13,13 @@ woahwoahwoah
 </Button> */
 const Home = () => {
   const history = useHistory();
-  const [loaded, setLoaded] = useState();
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => setLoaded(true), []);
 
   return (
-    <Grow in={loaded}>
-      <DefaultLayout>
+    <DefaultLayout>
+      <Grow in={loaded}>
         <Box
           display="flex"
           justifyContent="space-between"
@@ -50,8 +50,8 @@ const Home = () => {
           </Box>
           <img src="/yse.png" alt="person studying" />
         </Box>
-      </DefaultLayout>
-    </Grow>
+      </Grow>
+    </DefaultLayout>
   );
 };
 
