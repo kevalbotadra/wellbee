@@ -13,6 +13,10 @@ const theme = createMuiTheme({
       main: "#EBBC56",
       contrastText: "white",
     },
+    secondary: {
+      main: "#493843",
+      contrastText: "white",
+    },
   },
   shape: { borderRadius: "10" },
   overrides: {
@@ -40,6 +44,17 @@ const theme = createMuiTheme({
   typography: {
     allVariants: {
       fontFamily: "'Roboto', sans-serif",
+    },
+
+    h1: {
+      color: "#493843",
+    },
+    h2: {
+      color: "#493843",
+    },
+
+    h3: {
+      color: "#493843",
     },
   },
 });
