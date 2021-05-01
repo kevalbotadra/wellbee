@@ -1,0 +1,18 @@
+<svg width="256" height="243" viewBox="0 0 256 243" fill="none" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="180.106" cy="91.3266" rx="57.0674" ry="65.8827" transform="rotate(19.6431 180.106 91.3266)" fill="#EEF0F0" fill-opacity="0.5"/>
+<path d="M229.832 160.375L214.5 164.801L214.5 155.949L229.832 160.375Z" fill="#493843"/>
+<line x1="38.719" y1="95.6286" x2="21.0884" y2="71.5025" stroke="#493843" stroke-width="2"/>
+<line x1="44.0039" y1="96.315" x2="15.1406" y2="88.5811" stroke="#493843" stroke-width="2"/>
+<ellipse cx="110.049" cy="82.9753" rx="59.3872" ry="70.5223" transform="rotate(-14.2567 110.049 82.9753)" fill="#EEF0F0" fill-opacity="0.7"/>
+<ellipse cx="108.476" cy="154.854" rx="107.438" ry="86.0803" transform="rotate(0.696516 108.476 154.854)" fill="#EBBC56"/>
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="4" y="67" width="212" height="174">
+<ellipse cx="110.048" cy="153.962" rx="105.783" ry="86.761" fill="#EBBC56"/>
+</mask>
+<g mask="url(#mask0)">
+<rect x="147.165" y="69.9844" width="37.117" height="170.738" fill="#493843"/>
+<rect x="82.21" y="67.2007" width="37.117" height="173.522" fill="#493843"/>
+</g>
+<circle cx="22.3335" cy="144.764" r="5.1108" fill="#493843"/>
+<circle cx="20.4745" cy="70.4247" r="4.18157" fill="#493843"/>
+<circle cx="13.0409" cy="88.08" r="4.18157" fill="#493843"/>
+</svg>

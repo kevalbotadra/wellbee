@@ -22,15 +22,36 @@ export const ConnSelector = ({ selectedItem, setSelectedItem }) => (
       justifyContent="space-between"
       borderRadius="1.2rem"
       boxShadow="0 0 4px -1px gray"
-      padding="3rem 0"
       gridColumn="1/3"
-      paddingTop="3rem"
       paddingBottom="0"
+      position="relative"
     >
+      <Box
+        height="80px"
+        position="absolute"
+        width="100%"
+        textAlign="center"
+        bgcolor="#EBBC5633"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        style={{
+          borderTopRightRadius: "1rem",
+          borderTopLeftRadius: "1rem",
+        }}
+      >
+        <img
+          height="60px"
+          style={{ marginTop: "-5px" }}
+          src="/wellbee-bee.svg"
+          alt="our mascot!"
+        />
+      </Box>
       <List>
         <ListItem
           button
           style={{
+            marginTop: "8rem",
             height: "50px",
             paddingLeft: "2rem",
             borderRadius: "none !important",
