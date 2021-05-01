@@ -1,7 +1,7 @@
-import { Box, IconButton, styled, Typography } from "@material-ui/core";
+import { Box, Grow, IconButton, styled, Typography } from "@material-ui/core";
 import { EditTwoTone } from "@material-ui/icons";
 import { useEffect, useRef, useState } from "react";
-import { LoadingView } from "../components/LoadingView";
+import { SimpleLoadingView } from "../components/LoadingView";
 import { useAuth } from "../contexts/AuthContext";
 import firebase from "../firebase";
 import DefaultLayout from "../layouts/DefaultLayout";
@@ -76,119 +76,119 @@ const Profile = () => {
     }
   };
 
-  if (loading) return <LoadingView />;
-
   return (
     <DefaultLayout overflow="hidden">
-      <Box
-        overflow="hidden"
-        display="grid"
-        height="100%"
-        width="100%"
-        gridGap="1.5rem"
-        gridTemplateColumns="repeat(12, 1fr)"
-        gridTemplateRows="repeat(12, 1fr)"
-        padding="2rem"
-      >
-        <Typography
-          variant="h1"
-          color="secondary"
-          style={{ fontSize: 32, fontWeight: "bolder", gridColumn: "1/-1" }}
-        >
-          Your Profile
-        </Typography>
-        <Box
-          gridColumn="1/4"
-          gridRow="2/4"
-          borderRadius="1rem"
-          boxShadow="1px 2px 2px 0px gray, 0 0 3px -1px gray"
-          padding="2rem"
-        >
+      {loading ? (
+        <SimpleLoadingView />
+      ) : (
+        <Grow in={!loading}>
           <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
+            overflow="hidden"
+            style={{ overflowY: "hidden" }}
+            display="grid"
+            width="100%"
+            gridGap="1.5rem"
+            gridTemplateColumns="repeat(6, 1fr)"
+            gridTemplateRows="repeat(6, 1fr)"
+            padding="2rem"
           >
             <Typography
-              variant="h3"
-              style={{
-                fontSize: 24,
-                fontWeight: "bolder",
-                gridColumn: "1/-1",
-                marginBottom: "1rem",
-              }}
-            >
-              Name
-            </Typography>
-            <IconButton
-              style={{ fontSize: 24 }}
+              variant="h1"
               color="secondary"
-              onClick={() => nameRef.current.focus()}
+              style={{ fontSize: 32, fontWeight: "bolder", gridColumn: "1/-1" }}
             >
-              <EditTwoTone color="secondary" />
-            </IconButton>
-          </Box>
-          <CustomInput
-            defaultValue={currentUser.displayName}
-            ref={nameRef}
-            onChange={() => handleChange("name")}
-            style={{
-              fontSize: 22,
-              width: "100%",
-              gridColumn: "1/-1",
-              outline: "none",
-            }}
-          />
-        </Box>
-        <Box
-          gridColumn="1/4"
-          gridRow="4/8"
-          borderRadius="1rem"
-          boxShadow="1px 2px 2px 0px gray, 0 0 3px -1px gray"
-          padding="2rem"
-        >
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Typography
-              variant="h3"
-              style={{
-                fontSize: 24,
-                fontWeight: "bolder",
-                gridColumn: "1/-1",
-                marginBottom: "1rem",
-              }}
-            >
-              Bio
+              Your Profile
             </Typography>
-            <IconButton
-              style={{ fontSize: 24 }}
-              color="secondary"
-              onClick={() => bioRef.current.focus()}
+            <Box
+              gridColumn="1/3"
+              gridRow="2/4"
+              borderRadius="1rem"
+              boxShadow="1px 2px 2px 0px gray, 0 0 3px -1px gray"
+              padding="2rem"
             >
-              <EditTwoTone color="secondary" />
-            </IconButton>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Typography
+                  variant="h3"
+                  style={{
+                    fontSize: 24,
+                    fontWeight: "bolder",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  Name
+                </Typography>
+                <IconButton
+                  style={{ fontSize: 24 }}
+                  color="secondary"
+                  onClick={() => nameRef.current.focus()}
+                >
+                  <EditTwoTone color="secondary" />
+                </IconButton>
+              </Box>
+              <CustomInput
+                defaultValue={currentUser.displayName}
+                ref={nameRef}
+                onChange={() => handleChange("name")}
+                style={{
+                  fontSize: 22,
+                  width: "100%",
+                  outline: "none",
+                }}
+              />
+            </Box>
+            <Box
+              gridColumn="1/3"
+              gridRow="4/8"
+              borderRadius="1rem"
+              boxShadow="1px 2px 2px 0px gray, 0 0 3px -1px gray"
+              padding="2rem"
+            >
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Typography
+                  variant="h3"
+                  style={{
+                    fontSize: 24,
+                    fontWeight: "bolder",
+                    gridColumn: "1/-1",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  Bio
+                </Typography>
+                <IconButton
+                  style={{ fontSize: 24 }}
+                  color="secondary"
+                  onClick={() => bioRef.current.focus()}
+                >
+                  <EditTwoTone color="secondary" />
+                </IconButton>
+              </Box>
+              <CustomTextArea
+                defaultValue={user && user.bio ? user.bio : ""}
+                placeholder="Write something about yourself!"
+                ref={bioRef}
+                onChange={() => handleChange("bio")}
+                rows="3"
+                style={{
+                  fontSize: 16,
+                  width: "100%",
+                  height: "85%",
+                  gridColumn: "1/-1",
+                  outline: "none",
+                }}
+              />
+            </Box>
           </Box>
-          <CustomTextArea
-            defaultValue={user && user.bio ? user.bio : ""}
-            placeholder="Write something about yourself!"
-            ref={bioRef}
-            onChange={() => handleChange("bio")}
-            rows="3"
-            style={{
-              fontSize: 16,
-              width: "100%",
-              height: "85%",
-              gridColumn: "1/-1",
-              outline: "none",
-            }}
-          />
-        </Box>
-
-        {/* bio */}
-      </Box>
+        </Grow>
+      )}
     </DefaultLayout>
   );
 };
