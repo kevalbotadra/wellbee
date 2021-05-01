@@ -29,7 +29,7 @@ const Home = () => {
             variant="h5"
             style={{ marginBottom: "3rem", marginTop: "0.5rem" }}
           >
-            We provide help to those in need.
+            We connect those in need.
           </Typography>
           <Button
             variant="contained"
