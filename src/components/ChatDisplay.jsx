@@ -1,5 +1,5 @@
 import { Box, Grow, IconButton, styled, Typography } from "@material-ui/core";
-import { SendRounded } from "@material-ui/icons";
+import { SendRounded, StarOutline, StarOutlined } from "@material-ui/icons";
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import firebase from "../firebase";
@@ -21,7 +21,7 @@ const InputField = styled("input")({
   },
 });
 
-export const ChatDisplay = ({ activeChat }) => {
+export const ChatDisplay = ({ activeChat, userPref }) => {
   const inputRef = useRef();
 
   const { currentUser } = useAuth();
@@ -73,6 +73,20 @@ export const ChatDisplay = ({ activeChat }) => {
     return unsub;
   }, [activeChat]);
 
+  const changeStarred = localStarred =>
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(currentUser.uid)
+      .set(
+        {
+          favourites: localStarred
+            ? firebase.firestore.FieldValue.arrayUnion(activeChat.id)
+            : firebase.firestore.FieldValue.arrayRemove(activeChat.id),
+        },
+        { merge: true }
+      );
+
   return (
     <Grow in={true}>
       <Box
@@ -111,6 +125,19 @@ export const ChatDisplay = ({ activeChat }) => {
             {" "}
             Friends for 21 days
           </Typography>
+          <IconButton
+            onClick={() =>
+              changeStarred(
+                userPref && !userPref.favourites.includes(activeChat.id)
+              )
+            }
+          >
+            {userPref && userPref.favourites.includes(activeChat.id) ? (
+              <StarOutlined color="primary" />
+            ) : (
+              <StarOutline />
+            )}
+          </IconButton>
         </Box>
         <Box
           gridRow="1/3"
@@ -135,6 +162,7 @@ export const ChatDisplay = ({ activeChat }) => {
             alignSelf="center"
           >
             <InputField
+              autoFocus
               ref={inputRef}
               placeholder="Enter a message!"
               onKeyPress={e => e.key === "Enter" && send()}

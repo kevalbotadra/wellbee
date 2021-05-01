@@ -1,4 +1,4 @@
-import { Box, Fade } from "@material-ui/core";
+import { Box, Fade, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { ChatItem } from "./ChatItem";
@@ -35,6 +35,7 @@ export const ChatSelector = ({
   chats,
   currentUser,
   focusChat,
+  title,
 }) => {
   const [chatItems, setChatItems] = useState([]);
   const history = useHistory();
@@ -62,6 +63,9 @@ export const ChatSelector = ({
         gridColumn="3/-1"
         gridGap="1rem"
       >
+        <Typography variant="h1" style={{ fontSize: 28, fontWeight: "bolder" }}>
+          {title}
+        </Typography>
         {chatItems.map((item, key) => (
           <ChatItem
             author={item.author}

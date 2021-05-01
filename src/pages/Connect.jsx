@@ -16,6 +16,9 @@ const Connect = props => {
   //   const [chatLoading, setChatLoading] = useState(false);
 
   const [chats, setChats] = useState([]);
+  const [favouriteChats, setFavouriteChats] = useState([]);
+
+  const [userPref, setUserPref] = useState();
 
   const { currentUser } = useAuth();
 
@@ -52,6 +55,31 @@ const Connect = props => {
   }, [currentUser]);
 
   useEffect(() => {
+    const unsub = firebase
+      .firestore()
+      .collection("users")
+      .doc(currentUser.uid)
+      .onSnapshot(snapshot => {
+        const pref = snapshot.data();
+
+        if (!snapshot.exists) return;
+        console.log(pref);
+
+        setUserPref(pref);
+      });
+
+    return unsub;
+  }, [currentUser.uid]);
+
+  useEffect(() => {
+    if (!userPref) return;
+    const favs = userPref.favourites;
+    if (!favs) return;
+    const favChats = chats.filter(chat => favs.includes(chat.id));
+    setFavouriteChats(favChats);
+  }, [userPref, chats]);
+
+  useEffect(() => {
     const chatid = props.match.params.chatid;
     setActiveChat(chats.find(chat => chat.id === chatid));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,13 +99,23 @@ const Connect = props => {
         />
 
         {!activeChat ? (
-          <ChatSelector
-            selectedItem={selectedItem}
-            chats={chats}
-            currentUser={currentUser}
-          />
+          selectedItem === "chat" ? (
+            <ChatSelector
+              title="All Chats"
+              selectedItem={selectedItem}
+              chats={chats}
+              currentUser={currentUser}
+            />
+          ) : selectedItem === "favourites" ? (
+            <ChatSelector
+              title="Favourite Chats"
+              selectedItem={selectedItem}
+              chats={favouriteChats}
+              currentUser={currentUser}
+            />
+          ) : null
         ) : (
-          <ChatDisplay activeChat={activeChat} />
+          <ChatDisplay activeChat={activeChat} userPref={userPref} />
         )}
       </Box>
     </DefaultLayout>
