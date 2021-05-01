@@ -20,6 +20,8 @@ const Navbar = () => {
         boxShadow="0 0 4px -1px gray"
         padding="1rem"
         display="flex"
+        bgcolor="#493843"
+        color="white"
         justifyContent="space-between"
         borderRadius="20rem"
         alignItems="center"
@@ -44,20 +46,23 @@ const Navbar = () => {
         <Box display="flex">
           <Button
             onClick={() => history.push("/")}
-            style={{ marginLeft: "1rem" }}
+            color="white"
+            style={{ marginLeft: "1rem", color: "white" }}
           >
             Home
           </Button>
           <Button
             onClick={() => history.push("/help")}
-            style={{ marginLeft: "1rem" }}
+            color="white"
+            style={{ marginLeft: "1rem", color: "white" }}
           >
             Get Help
           </Button>
           {currentUser && (
             <Button
               onClick={() => history.push("/profile")}
-              style={{ marginLeft: "1rem" }}
+              color="white"
+              style={{ marginLeft: "1rem", color: "white" }}
             >
               Profile
             </Button>
