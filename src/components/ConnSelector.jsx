@@ -16,7 +16,7 @@ import {
 export const ConnSelector = ({ selectedItem, setSelectedItem }) => (
   <Fade in={true}>
     <Box
-      height="70vh"
+      height="100%"
       display="flex"
       flexDirection="column"
       justifyContent="space-between"
