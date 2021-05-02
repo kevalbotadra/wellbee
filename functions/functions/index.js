@@ -96,3 +96,45 @@ exports.addChat = functions.https.onRequest(async (req, res) => {
 
   res.status(201).json({ message: "Created chat", chat });
 });
+
+exports.find = functions.https.onCall(async (data, context) => {
+  context.rawRequest.header("Access-Control-Allow-Origin", "*");
+  if (!context || !context.auth) return;
+  const { uid } = context.auth;
+  if (!uid) return;
+
+  const currentTime = Date.now();
+
+  const user = await admin
+    .firestore()
+    .collection("users")
+    .doc(uid)
+    .get()
+    .then(user => user.data())
+    .then(user => ({
+      id: uid,
+      bio: user.bio !== "" ? user.bio : "No bio included.",
+    }));
+
+  if (!user) return;
+
+  const allUsers = await admin
+    .firestore()
+    .collection("users")
+    .get()
+    .then(users => users.docs.map(doc => doc.data()))
+    .then(users =>
+      users.filter(user =>
+        user.lastMatched ? currentTime - user.lastMatched <= 86400000 : true
+      )
+    )
+    .then(users =>
+      users.map(user => ({
+        id: user.id,
+        bio: user.bio !== "" ? user.bio : "No bio included.",
+      }))
+    )
+    .then(users => users.filter(user => user.id !== uid));
+
+  return { user, allUsers };
+});

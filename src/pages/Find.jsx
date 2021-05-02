@@ -46,8 +46,7 @@ const Find = () => {
       );
     }, 3000);
 
-    // const fun = firebase.functions().httpsCallable("find");
-    // fun().then(res => console.log(res));
+    firebase.functions().httpsCallable("find")();
   };
 
   return (
