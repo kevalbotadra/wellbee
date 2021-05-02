@@ -40,6 +40,8 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
   const [messages, setMessages] = useState([]);
   const [otherUser, setOtherUser] = useState();
 
+  const [setniment, setSentiment] = useState();
+
   const [messageLimit, setMessageLimit] = useState(50);
 
   const [loading, setLoading] = useState(true);
@@ -76,6 +78,23 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
       lastMessageTimestamp: Date.now(),
     });
   };
+
+  // useEffect(
+  //   () =>
+  //     setInterval(
+  //       () =>
+  //         axios.post("https://wellbee-main-fzd4o4tpia-uc.a.run.app/sentiment"),
+  //       { messages }
+  //     )
+  //       .then(res => res.data)
+  //       .then(data => setSentiment(data)),
+  //   []
+  // );
+
+  // const terminateChat = () => {
+  //   const id = activeChat.id
+  //   firebase.firestore().collection("chats").doc(id).delete()
+  // }
 
   useEffect(() => {
     const unsub = firebase
@@ -235,6 +254,22 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
             </IconButton>
           </Box>
         </Box>
+
+        {/* <Box>
+          <Typography>Sentiment Analysis</Typography>
+          <Typography>Status: {sentimentStatus}</Typography>
+          {status === "angry" || status === "negative" ? (
+            <>
+              <Typography variant="h1">
+                We've detected some negative emotion in this chat, press the
+                button below to have it terminated
+              </Typography>
+              <Button color="primary" onClick={terminateChat}>
+                Terminate Chat
+              </Button>
+            </>
+          ) : null}
+        </Box> */}
       </Box>
     </Grow>
   );
