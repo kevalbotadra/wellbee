@@ -71,7 +71,7 @@ ReactDOM.render(
     {ReactDOM.createPortal(
       <Toaster
         position="top"
-        toastOptions={{ style: { marginTop: "2rem" } }}
+        toastOptions={{ style: { marginTop: "2rem" }, duration: 1500 }}
       />,
       portalNode
     )}

@@ -1,6 +1,14 @@
-import { Box, Grow, IconButton, styled, Typography } from "@material-ui/core";
+import {
+  Box,
+  Grow,
+  IconButton,
+  styled,
+  Typography,
+  useMediaQuery,
+} from "@material-ui/core";
 import { SendRounded, StarOutline, StarOutlined } from "@material-ui/icons";
 import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import firebase from "../firebase";
@@ -24,6 +32,7 @@ const InputField = styled("input")({
 });
 
 export const ChatDisplay = ({ activeChat, userPref }) => {
+  const small = useMediaQuery("(max-width: 1200px)");
   const inputRef = useRef();
 
   const { currentUser } = useAuth();
@@ -39,6 +48,10 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
   const send = () => {
     const message = inputRef.current.value;
     if (message === "") return;
+    if (message.length > 500) {
+      toast.error("Please enter a shorter message");
+      return;
+    }
     inputRef.current.value = "";
 
     //  send the actual message
@@ -123,7 +136,7 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
         borderRadius="1.2rem"
         boxShadow="0 0 4px -1px gray"
         padding="0"
-        gridColumn="3/-1"
+        gridColumn={small ? "4/-1" : "3/-1"}
         paddingBottom="0"
         marginLeft="2rem"
         display="grid"
@@ -132,6 +145,7 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
       >
         <Box
           gridRow="1/2"
+          gridColumn="1/-1"
           borderBottom="1px solid #aaa"
           display="flex"
           alignItems="center"
@@ -182,13 +196,14 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
             )}
           </IconButton>
         </Box>
-        <Box
+        {/* <Box
           gridRow="1/3"
           gridColumn="2/3"
           boxShadow="-2px 0 4px -1px #aaa"
-        ></Box>
+        ></Box> */}
 
         <Box
+          gridColumn="1/3"
           paddingBottom="1rem"
           width="100%"
           overflowY="scroll"

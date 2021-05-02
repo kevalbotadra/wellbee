@@ -1,9 +1,16 @@
-import { Box, Fade, styled } from "@material-ui/core";
+import {
+  Box,
+  Fade,
+  styled,
+  Typography,
+  useMediaQuery,
+} from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import firebase from "../firebase";
 import { ChatItem } from "./ChatItem";
 import { getTimePassed } from "./ChatSelector";
+import { SimpleLoadingView } from "./LoadingView";
 
 const Input = styled("input")({
   padding: "1rem",
@@ -18,6 +25,9 @@ const Input = styled("input")({
 });
 
 export const SearchSelector = ({ selectedItem, chats, currentUser }) => {
+  const small = useMediaQuery("(max-width: 1200px)");
+  const [loading, setLoading] = useState(true);
+
   const [chatItems, setChatItems] = useState([]);
   const [searchChatItems, setSearchChatItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -50,7 +60,9 @@ export const SearchSelector = ({ selectedItem, chats, currentUser }) => {
         });
       return formattedChat;
     });
-    Promise.all(formattedChats).then(yes => setChatItems(yes));
+    Promise.all(formattedChats)
+      .then(yes => setChatItems(yes))
+      .then(() => setLoading(false));
   }, [chats, currentUser.uid, currentUser.displayName, history]);
 
   useEffect(() => {
@@ -82,7 +94,7 @@ export const SearchSelector = ({ selectedItem, chats, currentUser }) => {
         flexDirection="column"
         paddingBottom="0"
         marginLeft="2rem"
-        gridColumn="3/-1"
+        gridColumn={small ? "4/-1" : "3/-1"}
         gridGap="1rem"
       >
         <Box display="flex">
@@ -94,6 +106,23 @@ export const SearchSelector = ({ selectedItem, chats, currentUser }) => {
           />
         </Box>
 
+        {loading && <SimpleLoadingView />}
+        {chatItems.length === 0 && !loading && (
+          <>
+            <Typography
+              variant="h2"
+              style={{ fontSize: 22, fontWeight: "bolder", letterSpacing: 0.7 }}
+            >
+              No chats right now :(
+            </Typography>
+            <Typography
+              variant="p"
+              style={{ fontSize: 18, fontWeight: "normal", letterSpacing: 0.7 }}
+            >
+              Press <strong>find friends</strong> to start a chat!
+            </Typography>
+          </>
+        )}
         {searchTerm !== ""
           ? searchChatItems.map((item, key) => (
               <ChatItem

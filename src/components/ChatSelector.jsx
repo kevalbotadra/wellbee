@@ -1,8 +1,9 @@
-import { Box, Fade, Typography } from "@material-ui/core";
+import { Box, Fade, Typography, useMediaQuery } from "@material-ui/core";
 import firebase from "firebase";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { ChatItem } from "./ChatItem";
+import { SimpleLoadingView } from "./LoadingView";
 
 export const getTimePassed = date => {
   var seconds = Math.floor((new Date() - date) / 1000);
@@ -38,7 +39,9 @@ export const ChatSelector = ({
   focusChat,
   title,
 }) => {
+  const small = useMediaQuery("(max-width: 1200px)");
   const [chatItems, setChatItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   const history = useHistory();
 
   useEffect(() => {
@@ -68,7 +71,9 @@ export const ChatSelector = ({
         });
       return formattedChat;
     });
-    Promise.all(formattedChats).then(yes => setChatItems(yes));
+    Promise.all(formattedChats)
+      .then(yes => setChatItems(yes))
+      .then(() => setLoading(false));
   }, [chats, currentUser.uid, focusChat, currentUser.displayName, history]);
 
   return (
@@ -79,7 +84,7 @@ export const ChatSelector = ({
         flexDirection="column"
         paddingBottom="0"
         marginLeft="2rem"
-        gridColumn="3/-1"
+        gridColumn={small ? "4/-1" : "3/-1"}
         gridGap="1rem"
       >
         <Typography
@@ -88,6 +93,23 @@ export const ChatSelector = ({
         >
           {title}
         </Typography>
+        {loading && <SimpleLoadingView />}
+        {chatItems.length === 0 && !loading && (
+          <>
+            <Typography
+              variant="h2"
+              style={{ fontSize: 22, fontWeight: "bolder", letterSpacing: 0.7 }}
+            >
+              No chats right now :(
+            </Typography>
+            <Typography
+              variant="p"
+              style={{ fontSize: 18, fontWeight: "normal", letterSpacing: 0.7 }}
+            >
+              Press <strong>find friends</strong> to start a chat!
+            </Typography>
+          </>
+        )}
         {chatItems.map((item, key) => (
           <ChatItem
             author={item.author}
