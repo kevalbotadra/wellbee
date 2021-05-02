@@ -128,11 +128,15 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
           <IconButton
             onClick={() =>
               changeStarred(
-                userPref && !userPref.favourites.includes(activeChat.id)
+                userPref &&
+                  userPref.favourites &&
+                  !userPref.favourites.includes(activeChat.id)
               )
             }
           >
-            {userPref && userPref.favourites.includes(activeChat.id) ? (
+            {userPref &&
+            userPref.favourites &&
+            userPref.favourites.includes(activeChat.id) ? (
               <StarOutlined color="primary" />
             ) : (
               <StarOutline />
@@ -152,7 +156,11 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
           display="grid"
           gridTemplateRows="90% 10%"
         >
-          <ChatMessageDisplay messages={messages} uid={currentUser.uid} />
+          <ChatMessageDisplay
+            messages={messages}
+            uid={currentUser.uid}
+            chat={activeChat}
+          />
 
           <Box
             display="flex"
