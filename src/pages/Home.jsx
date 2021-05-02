@@ -1,4 +1,10 @@
-import { Box, Button, Grow, Typography } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Grow,
+  Typography,
+  useMediaQuery,
+} from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import DefaultLayout from "../layouts/DefaultLayout";
@@ -14,6 +20,7 @@ woahwoahwoah
 const Home = () => {
   const history = useHistory();
   const [loaded, setLoaded] = useState(false);
+  const small = useMediaQuery("(max-width: 1200px)");
 
   useEffect(() => setLoaded(true), []);
 
@@ -48,7 +55,12 @@ const Home = () => {
               Get Started
             </Button>
           </Box>
-          <img loading="eager" src="/yse.png" alt="person studying" />
+          <img
+            loading="eager"
+            width={small && "50%"}
+            src="/yse.png"
+            alt="person studying"
+          />
         </Box>
       </Grow>
     </DefaultLayout>

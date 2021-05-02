@@ -6,6 +6,7 @@ import {
   IconButton,
   styled,
   Typography,
+  useMediaQuery,
 } from "@material-ui/core";
 import { EditTwoTone } from "@material-ui/icons";
 import { useEffect, useRef, useState } from "react";
@@ -72,6 +73,7 @@ const Profile = () => {
   const { currentUser } = useAuth();
 
   const [loading, setLoading] = useState(true);
+  const small = useMediaQuery("(max-width: 1200px)");
 
   const [user, setUser] = useState("");
 
@@ -141,14 +143,14 @@ const Profile = () => {
               overflow="hidden"
               style={{ overflowY: "hidden" }}
               display="grid"
-              width="100%"
+              width={small ? "100%" : "50%"}
               gridGap="1.5rem"
               gridTemplateColumns="repeat(6, 1fr)"
               gridTemplateRows="repeat(6, 1fr)"
               padding="2rem"
             >
               <Box
-                style={{ gridColumn: "1/3", gridRow: "1/2" }}
+                style={{ gridColumn: "1/7", gridRow: "1/2" }}
                 display="flex"
                 alignItems="center"
                 justifyContent="space-between"
@@ -172,7 +174,7 @@ const Profile = () => {
                 </Button>
               </Box>
               <Box
-                gridColumn="1/3"
+                gridColumn="1/5"
                 gridRow="2/4"
                 marginTop="-1rem"
                 borderRadius="1rem"
@@ -214,7 +216,7 @@ const Profile = () => {
                 />
               </Box>
               <Box
-                gridColumn="1/3"
+                gridColumn="1/7"
                 gridRow="4/8"
                 borderRadius="1rem"
                 boxShadow="1px 2px 2px 0px gray, 0 0 3px -1px gray"
@@ -260,7 +262,7 @@ const Profile = () => {
                 />
               </Box>
               <Box
-                gridColumn="3/4"
+                gridColumn="5/7"
                 gridRow="2/3"
                 borderRadius="1rem"
                 display="flex"
