@@ -141,9 +141,11 @@ const Profile = () => {
           <>
             <Box
               overflow="hidden"
-              style={{ overflowY: "hidden" }}
+              style={{ overflowY: "hidden", transform: "translateX(-50%)" }}
               display="grid"
+              justifyContent="center"
               width={small ? "100%" : "50%"}
+              marginLeft="50%"
               gridGap="1.5rem"
               gridTemplateColumns="repeat(6, 1fr)"
               gridTemplateRows="repeat(6, 1fr)"

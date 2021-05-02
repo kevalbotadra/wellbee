@@ -13,9 +13,11 @@ import {
   SportsHandballOutlined,
   Star,
 } from "@material-ui/icons";
+import { useHistory } from "react-router-dom";
 
 export const ConnSelector = ({ selectedItem, setSelectedItem }) => {
   const small = useMediaQuery("(max-width: 1200px)");
+  const history = useHistory();
 
   return (
     <Fade in={true}>
@@ -149,6 +151,7 @@ export const ConnSelector = ({ selectedItem, setSelectedItem }) => {
 
         <ListItem
           button
+          onClick={() => history.push("/find")}
           style={{
             height: "69px",
             paddingLeft: "2rem",

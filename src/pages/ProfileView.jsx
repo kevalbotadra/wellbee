@@ -1,4 +1,11 @@
-import { Avatar, Box, Grow, styled, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Box,
+  Grow,
+  styled,
+  Typography,
+  useMediaQuery,
+} from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { SimpleLoadingView } from "../components/LoadingView";
 import { useAuth } from "../contexts/AuthContext";
@@ -19,6 +26,7 @@ const ProfileView = props => {
   const [loading, setLoading] = useState(true);
 
   const [user, setUser] = useState("");
+  const small = useMediaQuery("(max-width: 1200px)");
 
   const { currentUser } = useAuth();
 
@@ -52,8 +60,12 @@ const ProfileView = props => {
         <Grow in={!loading}>
           <>
             <Box
+              marginLeft={!small && "50%"}
               overflow="hidden"
-              style={{ overflowY: "hidden" }}
+              style={{
+                overflowY: "hidden",
+                transform: !small && "translateX(-25%)",
+              }}
               width="100%"
               padding="2rem"
             >
@@ -66,12 +78,13 @@ const ProfileView = props => {
                   marginBottom: "2rem",
                 }}
               >
-                Your Profile
+                {user.displayName.split(" ")[0]}'s Profile
               </Typography>
               <Box
+                width="100%"
                 borderRadius="1rem"
                 boxShadow="1px 2px 2px 0px gray, 0 0 3px -1px gray"
-                maxWidth="40%"
+                maxWidth={small ? "70%" : "40%"}
                 padding="2rem"
               >
                 <Box

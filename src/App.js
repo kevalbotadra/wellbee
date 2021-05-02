@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { PrivateRoute } from "./components/PrivateRoute";
 import Connect from "./pages/Connect";
+import Find from "./pages/Find";
 import Home from "./pages/Home";
 import { Login } from "./pages/Login";
 import Profile from "./pages/Profile";
@@ -14,6 +15,7 @@ const App = () => (
 
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
+      <PrivateRoute path="/find" component={Find} />
       <PrivateRoute path="/connect/:chatid" component={Connect} />
       <PrivateRoute path="/connect" component={Connect} />
       <PrivateRoute path="/profile/:userid" component={ProfileView} />
