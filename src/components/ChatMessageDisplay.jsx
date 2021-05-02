@@ -1,11 +1,16 @@
-import { Avatar, Box, Typography } from "@material-ui/core";
+import { Avatar, Box, Button, Typography } from "@material-ui/core";
 import { useEffect, useRef, useState } from "react";
 import { emojify } from "react-emoji";
 import { useAuth } from "../contexts/AuthContext";
 import firebase from "../firebase";
 import { SimpleLoadingView } from "./LoadingView";
 
-export const ChatMessageDisplay = ({ messages, uid, chat }) => {
+export const ChatMessageDisplay = ({
+  messages,
+  uid,
+  chat,
+  increaseMessageLimit,
+}) => {
   const dumdumRef = useRef();
   const [otherUser, setOtherUser] = useState(null);
   const [loaded, setLoaded] = useState(null);
@@ -35,69 +40,83 @@ export const ChatMessageDisplay = ({ messages, uid, chat }) => {
       {!loaded ? (
         <SimpleLoadingView />
       ) : (
-        messages.map(message => {
-          if (message.from === uid)
-            return (
-              <Box
-                display="flex"
-                flexDirection="row-reverse"
-                alignSelf="right"
-                alignItems="center"
-                margin="1rem"
-                marginRight="2rem"
-              >
-                <Avatar src={currentUser.photoURL} />
+        <>
+          <Button
+            variant="contained"
+            color="secondary"
+            style={{
+              marginLeft: "50%",
+              transform: "translateX(-50%)",
+              marginTop: "1rem",
+            }}
+            onClick={increaseMessageLimit}
+          >
+            Load More Messages
+          </Button>
+          {messages.map(message => {
+            if (message.from === uid)
+              return (
                 <Box
-                  borderRadius="10rem"
-                  bgcolor="#F4F6F6"
-                  padding="0.6rem 1.3rem"
-                  marginRight="1rem"
+                  display="flex"
+                  flexDirection="row-reverse"
+                  alignSelf="right"
+                  alignItems="center"
+                  margin="1rem"
+                  marginRight="2rem"
                 >
-                  <Typography style={{ textAlign: "right" }}>
-                    {emojify(message.content, {
-                      emojiType: "emojione",
-                      attributes: {
-                        height: "18px",
-                        width: "18px",
-                        style: { marginBottom: "-4px" },
-                      },
-                    })}
-                  </Typography>
+                  <Avatar src={currentUser.photoURL} />
+                  <Box
+                    borderRadius="10rem"
+                    bgcolor="#F4F6F6"
+                    padding="0.6rem 1.3rem"
+                    marginRight="1rem"
+                  >
+                    <Typography style={{ textAlign: "right" }}>
+                      {emojify(message.content, {
+                        emojiType: "emojione",
+                        attributes: {
+                          height: "18px",
+                          width: "18px",
+                          style: { marginBottom: "-4px" },
+                        },
+                      })}
+                    </Typography>
+                  </Box>
                 </Box>
-              </Box>
-            );
-          else
-            return (
-              <Box
-                display="flex"
-                flexDirection="row"
-                alignSelf="right"
-                alignItems="center"
-                margin="1rem"
-                marginLeft="2rem"
-              >
-                <Avatar src={otherUser && otherUser.photoURL} />
+              );
+            else
+              return (
                 <Box
-                  borderRadius="10rem"
-                  bgcolor="#FFF"
-                  border="2px solid #e9eded"
-                  padding="0.6rem 1.3rem"
-                  marginLeft="1rem"
+                  display="flex"
+                  flexDirection="row"
+                  alignSelf="right"
+                  alignItems="center"
+                  margin="1rem"
+                  marginLeft="2rem"
                 >
-                  <Typography style={{ textAlign: "left" }}>
-                    {emojify(message.content, {
-                      emojiType: "emojione",
-                      attributes: {
-                        height: "18px",
-                        width: "18px",
-                        style: { marginBottom: "-4px" },
-                      },
-                    })}
-                  </Typography>
+                  <Avatar src={otherUser && otherUser.photoURL} />
+                  <Box
+                    borderRadius="10rem"
+                    bgcolor="#FFF"
+                    border="2px solid #e9eded"
+                    padding="0.6rem 1.3rem"
+                    marginLeft="1rem"
+                  >
+                    <Typography style={{ textAlign: "left" }}>
+                      {emojify(message.content, {
+                        emojiType: "emojione",
+                        attributes: {
+                          height: "18px",
+                          width: "18px",
+                          style: { marginBottom: "-4px" },
+                        },
+                      })}
+                    </Typography>
+                  </Box>
                 </Box>
-              </Box>
-            );
-        })
+              );
+          })}
+        </>
       )}
       <Box id="dumdum" ref={dumdumRef} />
     </Box>

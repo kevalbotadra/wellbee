@@ -31,6 +31,8 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
   const [messages, setMessages] = useState([]);
   const [otherUser, setOtherUser] = useState();
 
+  const [messageLimit, setMessageLimit] = useState(50);
+
   const [loading, setLoading] = useState(true);
   const history = useHistory();
 
@@ -67,6 +69,8 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
       .firestore()
       .collection("messages")
       .where("chatid", "==", activeChat.id)
+      .orderBy("timestamp", "desc")
+      .limit(messageLimit)
       .onSnapshot(snapshot => {
         let docs = snapshot.docs;
         docs = docs.map(doc => doc.data());
@@ -77,7 +81,7 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
       });
 
     return unsub;
-  }, [activeChat]);
+  }, [activeChat, messageLimit]);
 
   useEffect(
     () =>
@@ -192,6 +196,7 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
           gridTemplateRows="90% 10%"
         >
           <ChatMessageDisplay
+            increaseMessageLimit={() => setMessageLimit(messageLimit + 50)}
             messages={messages}
             uid={currentUser.uid}
             chat={activeChat}
