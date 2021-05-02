@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { ChatDisplay } from "../components/ChatDisplay";
 import { ChatSelector } from "../components/ChatSelector";
 import { ConnSelector } from "../components/ConnSelector";
+import { Robot } from "../components/Robot";
 import { SearchSelector } from "../components/SearchSelector";
 import { useAuth } from "../contexts/AuthContext";
 import firebase from "../firebase";
@@ -116,6 +117,13 @@ const Connect = props => {
             />
           ) : selectedItem === "search" ? (
             <SearchSelector
+              title="Search Selector"
+              selectedItem={selectedItem}
+              chats={chats}
+              currentUser={currentUser}
+            />
+          ) : selectedItem === "robot" ? (
+            <Robot
               title="Search Selector"
               selectedItem={selectedItem}
               chats={chats}
