@@ -265,7 +265,7 @@ const Profile = () => {
               </Box>
               <Box
                 gridColumn="5/7"
-                gridRow="2/3"
+                gridRow="2/4"
                 borderRadius="1rem"
                 display="flex"
                 marginTop="-1rem"
