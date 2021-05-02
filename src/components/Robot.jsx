@@ -34,7 +34,7 @@ export const Robot = () => {
         secret: "CONGPilDnoMinEThonYAnkoLViTypOlmStOd",
         inputs: [prompt],
       })
-      .then(response => setGptResponse(response.data))
+      .then(response => setGptResponse(JSON.stringify(response.data)))
       .then(() => setLoadingButton(false));
   };
 
