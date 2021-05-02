@@ -68,7 +68,13 @@ ReactDOM.render(
         <App />
       </ThemeProvider>
     </AuthProvider>
-    {ReactDOM.createPortal(<Toaster position="bottom-center" />, portalNode)}
+    {ReactDOM.createPortal(
+      <Toaster
+        position="top"
+        toastOptions={{ style: { marginTop: "2rem" } }}
+      />,
+      portalNode
+    )}
   </React.StrictMode>,
   document.getElementById("root")
 );

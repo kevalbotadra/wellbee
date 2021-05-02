@@ -8,7 +8,6 @@ import {
 } from "@material-ui/core";
 import {
   Inbox,
-  Person,
   Search,
   SportsHandballOutlined,
   Star,
@@ -131,13 +130,16 @@ export const ConnSelector = ({ selectedItem, setSelectedItem }) => (
           onClick={() => setSelectedItem("friends")}
         >
           <ListItemIcon>
-            <Person
+            <img
+              src="/Robot.png"
+              alt="robot"
+              width="28px"
               style={{
                 color: selectedItem === "friends" && "#EBBC56",
               }}
             />
           </ListItemIcon>
-          <ListItemText primary="Friends" />
+          <ListItemText primary="Robot" />
         </ListItem>
       </List>
 

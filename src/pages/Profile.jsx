@@ -84,14 +84,16 @@ const Profile = () => {
         .firestore()
         .collection("users")
         .doc(currentUser.uid)
-        .get()
-        .then(doc => setUser(doc.data()))
-        .then(() => setLoading(false)),
+        .onSnapshot(snapshot => {
+          const doc = snapshot.data();
+          console.log("often");
+          setUser(doc);
 
-    [currentUser]
+          if (loading) setLoading(false);
+        }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   );
-
-  useEffect(() => console.log(currentUser), [currentUser]);
 
   const handleChange = type => {
     switch (type) {
@@ -116,6 +118,14 @@ const Profile = () => {
     }
   };
 
+  const switchPrivate = () => {
+    firebase
+      .firestore()
+      .doc(`users/${currentUser.uid}`)
+      .update({ private: !user.private })
+      .then(() => toast.success("Updated profile"));
+  };
+
   return (
     <DefaultLayout overflow="hidden">
       {loading ? (
@@ -133,17 +143,30 @@ const Profile = () => {
               gridTemplateRows="repeat(6, 1fr)"
               padding="2rem"
             >
-              <Typography
-                variant="h1"
-                color="secondary"
-                style={{
-                  fontSize: 32,
-                  fontWeight: "bolder",
-                  gridColumn: "1/-1",
-                }}
+              <Box
+                style={{ gridColumn: "1/3", gridRow: "1/2" }}
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
               >
-                Your Profile
-              </Typography>
+                <Typography
+                  variant="h1"
+                  color="secondary"
+                  style={{
+                    fontSize: 32,
+                    fontWeight: "bolder",
+                  }}
+                >
+                  Your Profile
+                </Typography>
+                <Button
+                  color="secondary"
+                  variant={user.private ? "outlined" : "contained"}
+                  onClick={() => switchPrivate()}
+                >
+                  {user.private ? "Make Public" : "Make Private"}
+                </Button>
+              </Box>
               <Box
                 gridColumn="1/3"
                 gridRow="2/4"
@@ -234,6 +257,7 @@ const Profile = () => {
               </Box>
               <Box
                 gridColumn="3/4"
+                gridRow="2/3"
                 borderRadius="1rem"
                 display="flex"
                 marginTop="-1rem"

@@ -32,10 +32,26 @@ export const Register = () => {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        firebase.auth().currentUser.updateProfile({ displayName: name });
-
-        toast.success("Account Created! Welcome");
-        history.push("/connect");
+        firebase
+          .auth()
+          .currentUser.updateProfile({ displayName: name })
+          .then(() => {
+            firebase
+              .firestore()
+              .doc(`users/${firebase.auth().currentUser.uid}`)
+              .set({
+                id: firebase.auth().currentUser.uid,
+                bio: "",
+                displayName: name,
+                favourites: [],
+                photoUrl: "",
+                private: false,
+              })
+              .then(() => {
+                toast.success("Account Created! Welcome");
+                history.push("/connect");
+              });
+          });
       })
       .catch(error => {
         console.log(error);

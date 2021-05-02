@@ -48,7 +48,7 @@ const Home = () => {
               Get Started
             </Button>
           </Box>
-          <img src="/yse.png" alt="person studying" />
+          <img loading="eager" src="/yse.png" alt="person studying" />
         </Box>
       </Grow>
     </DefaultLayout>

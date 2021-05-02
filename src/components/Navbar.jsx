@@ -38,7 +38,13 @@ const Navbar = () => {
         wellbee
       </Typography> */}
         <img
-          style={{ marginLeft: "1.2rem" }}
+          onClick={() => history.push("/")}
+          style={{
+            marginLeft: "1.2rem",
+            cursor: "pointer",
+            transition: "filter 200ms",
+            "&:hover": { filter: "brightness(0.9)", display: "none" },
+          }}
           src="/wellbee.svg"
           height="30"
           alt="the wellbee logo"
