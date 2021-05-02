@@ -9,6 +9,7 @@ import {
 import {
   Inbox,
   Person,
+  Search,
   SportsHandballOutlined,
   Star,
 } from "@material-ui/icons";
@@ -70,6 +71,29 @@ export const ConnSelector = ({ selectedItem, setSelectedItem }) => (
             />
           </ListItemIcon>
           <ListItemText primary="Chat" />
+        </ListItem>
+
+        <ListItem
+          button
+          style={{
+            height: "50px",
+            paddingLeft: "2rem",
+            borderRadius: "none !important",
+            marginBottom: "1rem",
+            color: selectedItem === "search" && "#EBBC56",
+            borderRight: selectedItem === "search" && "2px solid #EBBC56",
+            transition: "color 200ms",
+          }}
+          onClick={() => setSelectedItem("search")}
+        >
+          <ListItemIcon>
+            <Search
+              style={{
+                color: selectedItem === "search" && "#EBBC56",
+              }}
+            />
+          </ListItemIcon>
+          <ListItemText primary="Search" />
         </ListItem>
         <ListItem
           button

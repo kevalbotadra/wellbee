@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { ChatItem } from "./ChatItem";
 
-const getTimePassed = date => {
+export const getTimePassed = date => {
   var seconds = Math.floor((new Date() - date) / 1000);
 
   var interval = seconds / 31536000;

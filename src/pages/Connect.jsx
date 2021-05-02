@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { ChatDisplay } from "../components/ChatDisplay";
 import { ChatSelector } from "../components/ChatSelector";
 import { ConnSelector } from "../components/ConnSelector";
+import { SearchSelector } from "../components/SearchSelector";
 import { useAuth } from "../contexts/AuthContext";
 import firebase from "../firebase";
 import DefaultLayout from "../layouts/DefaultLayout";
@@ -111,6 +112,13 @@ const Connect = props => {
               title="Favourite Chats"
               selectedItem={selectedItem}
               chats={favouriteChats}
+              currentUser={currentUser}
+            />
+          ) : selectedItem === "search" ? (
+            <SearchSelector
+              title="Search Selector"
+              selectedItem={selectedItem}
+              chats={chats}
               currentUser={currentUser}
             />
           ) : null
