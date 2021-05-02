@@ -12,6 +12,7 @@ export const ChatMessageDisplay = ({
   increaseMessageLimit,
 }) => {
   const dumdumRef = useRef();
+  const topRef = useRef();
   const [otherUser, setOtherUser] = useState(null);
   const [loaded, setLoaded] = useState(null);
   const { currentUser } = useAuth();
@@ -44,12 +45,19 @@ export const ChatMessageDisplay = ({
           <Button
             variant="contained"
             color="secondary"
+            ref={topRef}
             style={{
               marginLeft: "50%",
               transform: "translateX(-50%)",
               marginTop: "1rem",
             }}
-            onClick={increaseMessageLimit}
+            onClick={() => {
+              increaseMessageLimit();
+              setTimeout(
+                () => topRef.current.scrollIntoView({ behavior: "smooth" }),
+                500
+              );
+            }}
           >
             Load More Messages
           </Button>
