@@ -129,11 +129,11 @@ export const ConnSelector = ({ selectedItem, setSelectedItem }) => {
               paddingLeft: "2rem",
               borderRadius: "none !important",
               marginBottom: "1rem",
-              color: selectedItem === "friends" && "#EBBC56",
-              borderRight: selectedItem === "friends" && "2px solid #EBBC56",
+              color: selectedItem === "robot" && "#EBBC56",
+              borderRight: selectedItem === "robot" && "2px solid #EBBC56",
               transition: "color 200ms",
             }}
-            onClick={() => setSelectedItem("friends")}
+            onClick={() => setSelectedItem("robot")}
           >
             <ListItemIcon>
               <img
@@ -141,7 +141,7 @@ export const ConnSelector = ({ selectedItem, setSelectedItem }) => {
                 alt="robot"
                 width="28px"
                 style={{
-                  color: selectedItem === "friends" && "#EBBC56",
+                  color: selectedItem === "robot" && "#EBBC56",
                 }}
               />
             </ListItemIcon>
