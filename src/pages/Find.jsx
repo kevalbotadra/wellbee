@@ -45,6 +45,9 @@ const Find = () => {
         { duration: 5000 }
       );
     }, 3000);
+
+    // const fun = firebase.functions().httpsCallable("find");
+    // fun().then(res => console.log(res));
   };
 
   return (
@@ -95,7 +98,7 @@ const Find = () => {
             >
               <Avatar
                 src={user.photoURL}
-                style={{ marginBottom: "1rem", width: "48px", height: "48px" }}
+                style={{ marginBottom: "1rem", width: "69px", height: "69px" }}
               />
               <Typography
                 variant="h2"

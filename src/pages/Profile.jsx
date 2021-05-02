@@ -273,7 +273,10 @@ const Profile = () => {
                 padding="1px"
                 boxShadow="1px 2px 2px 0px gray, 0 0 3px -1px gray"
               >
-                <Avatar style={{ margin: "2rem" }} src={currentUser.photoURL} />
+                <Avatar
+                  style={{ margin: "2rem", width: "69px" }}
+                  src={currentUser.photoURL}
+                />
                 {/* <img
                   style={{ margin: "2rem" }}
                   src={currentUser.photoUrl}
