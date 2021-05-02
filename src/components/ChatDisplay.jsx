@@ -1,9 +1,11 @@
 import { Box, Grow, IconButton, styled, Typography } from "@material-ui/core";
 import { SendRounded, StarOutline, StarOutlined } from "@material-ui/icons";
 import { useEffect, useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import firebase from "../firebase";
 import { ChatMessageDisplay } from "./ChatMessageDisplay";
+import { SimpleLoadingView } from "./LoadingView";
 
 const InputField = styled("input")({
   borderRadius: "10rem",
@@ -27,6 +29,10 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
   const { currentUser } = useAuth();
 
   const [messages, setMessages] = useState([]);
+  const [otherUser, setOtherUser] = useState();
+
+  const [loading, setLoading] = useState(true);
+  const history = useHistory();
 
   const send = () => {
     const message = inputRef.current.value;
@@ -73,6 +79,24 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
     return unsub;
   }, [activeChat]);
 
+  useEffect(
+    () =>
+      firebase
+        .firestore()
+        .doc(
+          `users/${
+            activeChat.participants[0] === currentUser.uid
+              ? activeChat.participants[1]
+              : activeChat.participants[0]
+          }`
+        )
+        .get()
+        .then(user => user.data())
+        .then(user => setOtherUser(user))
+        .then(() => setLoading(false)),
+    [activeChat, currentUser]
+  );
+
   const changeStarred = localStarred =>
     firebase
       .firestore()
@@ -87,6 +111,7 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
         { merge: true }
       );
 
+  if (loading) return <SimpleLoadingView />;
   return (
     <Grow in={true}>
       <Box
@@ -110,15 +135,25 @@ export const ChatDisplay = ({ activeChat, userPref }) => {
         >
           <Typography
             variation="h3"
+            onClick={() =>
+              history.push(
+                `/profile/${
+                  activeChat.participants[0] === currentUser.uid
+                    ? activeChat.participants[1]
+                    : activeChat.participants[0]
+                }`
+              )
+            }
             style={{
               fontWeight: "bold",
               fontSize: "18px",
               marginRight: "0.5rem",
+              cursor: "pointer",
             }}
           >
-            {activeChat.participantNames[0] === currentUser.displayName
-              ? activeChat.participantNames[1]
-              : activeChat.participantNames[0]}{" "}
+            {otherUser && otherUser.private
+              ? "Anonymous"
+              : otherUser.displayName}{" "}
             •
           </Typography>
           <Typography style={{ color: "gray" }}>

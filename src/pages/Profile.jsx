@@ -103,6 +103,10 @@ const Profile = () => {
         if (!name || name === currentUserRef.displayName) return;
 
         currentUserRef.updateProfile({ displayName: name });
+        firebase
+          .firestore()
+          .doc(`users/${currentUserRef.uid}`)
+          .set({ displayName: name }, { merge: true });
         return;
       case "bio":
         const bio = bioRef.current.value;

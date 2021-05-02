@@ -1,4 +1,5 @@
 import { Box, Fade, Typography } from "@material-ui/core";
+import firebase from "firebase";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { ChatItem } from "./ChatItem";
@@ -41,17 +42,35 @@ export const ChatSelector = ({
   const history = useHistory();
 
   useEffect(() => {
-    const formattedChats = chats.map(chat => ({
-      author:
-        chat.participantNames[0] === currentUser.displayName
-          ? chat.participantNames[1]
-          : chat.participantNames[0],
-      message: chat.lastMessage,
-      timestamp: getTimePassed(chat.lastMessageTimestamp) + " ago",
-      handleClick: () => history.push(`/connect/${chat.id}`),
-    }));
-    setChatItems(formattedChats);
+    const formattedChats = chats.map(async chat => {
+      const formattedChat = await firebase
+        .firestore()
+        .doc(
+          `users/${
+            chat.participants[0] === currentUser.uid
+              ? chat.participants[1]
+              : chat.participants[0]
+          }`
+        )
+        .get()
+        .then(user => user.data())
+        .then(user => {
+          let author;
+          if (user.private) author = "Anonymous";
+          else author = user.displayName;
+
+          return {
+            author,
+            message: chat.lastMessage,
+            timestamp: getTimePassed(chat.lastMessageTimestamp) + " ago",
+            handleClick: () => history.push(`/connect/${chat.id}`),
+          };
+        });
+      return formattedChat;
+    });
+    Promise.all(formattedChats).then(yes => setChatItems(yes));
   }, [chats, currentUser.uid, focusChat, currentUser.displayName, history]);
+
   return (
     <Fade in={true}>
       <Box
