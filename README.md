@@ -1,3 +1,4 @@
 # wellbee
 
-the swellest bee in the west
+Official Frontend (Backend integration as well) of WellBee
+
